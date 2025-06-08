@@ -1,5 +1,6 @@
 package com.springbootsprojects.employee_service.controller;
 
+import com.springbootsprojects.employee_service.dto.APIResponseDTO;
 import com.springbootsprojects.employee_service.dto.EmployeeDto;
 import com.springbootsprojects.employee_service.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/employee")
 public class EmployeeController {
     private EmployeeService employeeService;
+
     @PostMapping
     public ResponseEntity<EmployeeDto> saveEmployee(@RequestBody EmployeeDto employeeDto){
         EmployeeDto saveEmployee = employeeService.saveEmployee(employeeDto);
@@ -19,8 +21,8 @@ public class EmployeeController {
     }
 
     @GetMapping("{Id}")
-    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("Id") Long id){
-        EmployeeDto getEmployee = employeeService.getEmployeeById(id);
-        return new ResponseEntity<>(getEmployee, HttpStatus.OK);
+    public ResponseEntity<APIResponseDTO> getEmployeeById(@PathVariable("Id") Long id){
+        APIResponseDTO apiResponseDTO = employeeService.getEmployeeById(id);
+        return new ResponseEntity<>(apiResponseDTO, HttpStatus.OK);
     }
 }
